@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: kentkartstatsapi
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/kentkartdb?allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: root
+    password: 159632
+    driver-class-name: com.mysql.cj.jdbc.Driver
