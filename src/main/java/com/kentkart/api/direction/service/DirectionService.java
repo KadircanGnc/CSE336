@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class DirectionService {
-    
+
     private final DirectionRepository directionRepository;
 
     public Direction create(Direction direction) {
@@ -21,6 +21,10 @@ public class DirectionService {
 
     public Direction getById(String id) {
         return directionRepository.findById(id).orElse(null);
+    }
+
+    public Direction getByName(String name) {
+        return directionRepository.findByName(name).orElse(null);
     }
 
     public Page<Direction> getAll(Pageable pageable) {
