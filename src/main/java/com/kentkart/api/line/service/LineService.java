@@ -23,6 +23,10 @@ public class LineService {
         return lineRepository.findById(id).orElse(null);
     }
 
+    public Line getByLineCode(String lineCode) {
+        return lineRepository.findByLineCode(lineCode).orElse(null);
+    }
+
     public Page<Line> getAll(Pageable pageable) {
         return lineRepository.findAll(pageable);
     }

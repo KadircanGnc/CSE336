@@ -23,6 +23,10 @@ public class BusStopService {
         return busStopRepository.findById(id).orElse(null);
     }
 
+    public BusStop getByStopName(String stopName) {
+        return busStopRepository.findByStopName(stopName).orElse(null);
+    }
+
     public Page<BusStop> getAll(Pageable pageable) {
         return busStopRepository.findAll(pageable);
     }
