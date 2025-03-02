@@ -13,11 +13,11 @@ import com.kentkart.api.exception.BadParametersException;
 import com.kentkart.api.exception.NotFoundException;
 import com.kentkart.api.line.Line;
 import com.kentkart.api.line.service.LineService;
-import com.kentkart.api.line.xaction.CreateLine_WC_MLS_Request;
-import com.kentkart.api.line.xaction.CreateLine_WC_MLS_Response;
-import com.kentkart.api.line.xaction.GetLines_WC_MLS_Response;
-import com.kentkart.api.line.xaction.UpdateLine_WC_MLS_Request;
-import com.kentkart.api.line.xaction.UpdateLine_WC_MLS_Response;
+import com.kentkart.api.xaction.CreateLine_WC_MLS_Request;
+import com.kentkart.api.xaction.CreateLine_WC_MLS_Response;
+import com.kentkart.api.xaction.GetLines_WC_MLS_Response;
+import com.kentkart.api.xaction.UpdateLine_WC_MLS_Request;
+import com.kentkart.api.xaction.UpdateLine_WC_MLS_Response;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

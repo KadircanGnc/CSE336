@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kentkart.api.direction.Direction;
 import com.kentkart.api.direction.service.DirectionService;
-import com.kentkart.api.direction.xaction.CreateDirection_WC_MLS_Request;
-import com.kentkart.api.direction.xaction.CreateDirection_WC_MLS_Response;
-import com.kentkart.api.direction.xaction.GetDirection_WC_MLS_Response;
-import com.kentkart.api.direction.xaction.GetDirections_WC_MLS_Response;
-import com.kentkart.api.direction.xaction.UpdateDirection_WC_MLS_Request;
-import com.kentkart.api.direction.xaction.UpdateDirection_WC_MLS_Response;
 import com.kentkart.api.exception.BadParametersException;
 import com.kentkart.api.exception.NotFoundException;
+import com.kentkart.api.xaction.CreateDirection_WC_MLS_Request;
+import com.kentkart.api.xaction.CreateDirection_WC_MLS_Response;
+import com.kentkart.api.xaction.GetDirection_WC_MLS_Response;
+import com.kentkart.api.xaction.GetDirections_WC_MLS_Response;
+import com.kentkart.api.xaction.UpdateDirection_WC_MLS_Request;
+import com.kentkart.api.xaction.UpdateDirection_WC_MLS_Response;
 
 import lombok.RequiredArgsConstructor;
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kentkart.api.boarding.Boarding;
 import com.kentkart.api.boarding.repository.BoardingRepository;
+import com.kentkart.api.boarding.specifitacion.BoardingSpecification;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +16,8 @@ public class BoardingService {
 
   private final BoardingRepository boardingRepository;
 
+  private final BoardingSpecification boardingSpecification;
+
   public Boarding create(Boarding boarding) {
     return boardingRepository.save(boarding);
   }
@@ -23,11 +26,20 @@ public class BoardingService {
     return boardingRepository.findById(id).orElse(null);
   }
 
-  public Page<Boarding> getAll(Pageable pageable) {
-    return boardingRepository.findAll(pageable);
+  public Page<Boarding> getAll(
+      String[] passengerIds,
+      String[] passengerTypes,
+      String[] busStopIds,
+      String[] tripIds,
+      String[] boardingTypeIds,
+      Pageable pageable) {
+
+    return boardingRepository.findAll(
+        boardingSpecification.conditionalSearch(passengerIds, passengerTypes, busStopIds, tripIds, boardingTypeIds),
+        pageable);
   }
 
-  public void delete(String id) {
-    boardingRepository.deleteById(id);
+  public void delete(Boarding boarding) {
+    boardingRepository.delete(boarding);
   }
 }

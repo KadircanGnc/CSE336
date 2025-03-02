@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kentkart.api.departure.DepartureDay;
 import com.kentkart.api.departure.service.DepartureDayService;
-import com.kentkart.api.departure.xaction.departureDay.CreateDepartureDay_WC_MLS_Request;
-import com.kentkart.api.departure.xaction.departureDay.CreateDepartureDay_WC_MLS_Response;
-import com.kentkart.api.departure.xaction.departureDay.GetDepartureDays_WC_MLS_Response;
-import com.kentkart.api.departure.xaction.departureDay.UpdateDepartureDay_WC_MLS_Request;
-import com.kentkart.api.departure.xaction.departureDay.UpdateDepartureDay_WC_MLS_Response;
 import com.kentkart.api.exception.BadParametersException;
 import com.kentkart.api.exception.NotFoundException;
+import com.kentkart.api.xaction.CreateDepartureDay_WC_MLS_Request;
+import com.kentkart.api.xaction.CreateDepartureDay_WC_MLS_Response;
+import com.kentkart.api.xaction.GetDepartureDays_WC_MLS_Response;
+import com.kentkart.api.xaction.UpdateDepartureDay_WC_MLS_Request;
+import com.kentkart.api.xaction.UpdateDepartureDay_WC_MLS_Response;
 
 import lombok.RequiredArgsConstructor;
 

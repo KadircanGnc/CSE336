@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BoardingTypeService {
-    
+
     private final BoardingTypeRepository boardingTypeRepository;
 
     public BoardingType create(BoardingType boardingType) {
@@ -31,7 +31,7 @@ public class BoardingTypeService {
         return boardingTypeRepository.findAll(pageable);
     }
 
-    public void delete(String id) {
-        boardingTypeRepository.deleteById(id);
+    public void delete(BoardingType boardingType) {
+        boardingTypeRepository.delete(boardingType);
     }
 }

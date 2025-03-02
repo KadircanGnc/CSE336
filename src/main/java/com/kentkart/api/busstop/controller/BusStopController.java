@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kentkart.api.busstop.BusStop;
 import com.kentkart.api.busstop.service.BusStopService;
-import com.kentkart.api.busstop.xaction.CreateBusStop_WC_MLS_Request;
-import com.kentkart.api.busstop.xaction.CreateBusStop_WC_MLS_Response;
-import com.kentkart.api.busstop.xaction.GetBusStops_WC_MLS_Response;
-import com.kentkart.api.busstop.xaction.UpdateBusStop_WC_MLS_Request;
-import com.kentkart.api.busstop.xaction.UpdateBusStop_WC_MLS_Response;
 import com.kentkart.api.exception.BadParametersException;
 import com.kentkart.api.exception.NotFoundException;
+import com.kentkart.api.xaction.CreateBusStop_WC_MLS_Request;
+import com.kentkart.api.xaction.CreateBusStop_WC_MLS_Response;
+import com.kentkart.api.xaction.GetBusStops_WC_MLS_Response;
+import com.kentkart.api.xaction.UpdateBusStop_WC_MLS_Request;
+import com.kentkart.api.xaction.UpdateBusStop_WC_MLS_Response;
 
 import lombok.RequiredArgsConstructor;
 
