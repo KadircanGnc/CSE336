@@ -10,16 +10,16 @@ import lombok.Setter;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetBusStops_WC_MLS_Response {
-    
+
     private String id;
     private Double latitude;
     private Double longitude;
     private String stopName;
-    
+
     public GetBusStops_WC_MLS_Response(BusStop busStop) {
         this.id = busStop.getId();
         this.latitude = busStop.getLatitude();
         this.longitude = busStop.getLongitude();
-        this.stopName = busStop.getStopName();        
+        this.stopName = busStop.getStopName();
     }
 }

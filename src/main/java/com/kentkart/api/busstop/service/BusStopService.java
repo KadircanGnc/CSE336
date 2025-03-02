@@ -31,7 +31,7 @@ public class BusStopService {
         return busStopRepository.findAll(pageable);
     }
 
-    public void delete(String id) {
-        busStopRepository.deleteById(id);
+    public void delete(BusStop busStop) {
+        busStopRepository.delete(busStop);
     }
 }

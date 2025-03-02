@@ -25,12 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @RestController
 @RequestMapping("/api/v1/bus-stops")
 @RequiredArgsConstructor
 public class BusStopController {
-    
+
     private final BusStopService busStopService;
 
     @GetMapping
@@ -39,7 +38,8 @@ public class BusStopController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateBusStop_WC_MLS_Response> createBusStop(@RequestBody CreateBusStop_WC_MLS_Request request) {
+    public ResponseEntity<CreateBusStop_WC_MLS_Response> createBusStop(
+            @RequestBody CreateBusStop_WC_MLS_Request request) {
         BusStop busStopInDB = busStopService.getByStopName(request.getStopName());
         if (busStopInDB != null) {
             throw new BadParametersException("BusStop with busStopName " + request.getStopName() + " already exists");
@@ -51,7 +51,7 @@ public class BusStopController {
         busStopInDB = busStopService.create(busStopInDB);
         return ResponseEntity.ok(new CreateBusStop_WC_MLS_Response(busStopInDB));
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<GetBusStops_WC_MLS_Response> getBusStop(@PathVariable String id) {
         BusStop busStop = busStopService.getById(id);
@@ -60,9 +60,10 @@ public class BusStopController {
         }
         return ResponseEntity.ok(new GetBusStops_WC_MLS_Response(busStop));
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateBusStop_WC_MLS_Response> updateBusStop(@PathVariable String id, @RequestBody UpdateBusStop_WC_MLS_Request request) {
+    public ResponseEntity<UpdateBusStop_WC_MLS_Response> updateBusStop(@PathVariable String id,
+            @RequestBody UpdateBusStop_WC_MLS_Request request) {
         BusStop busStop = busStopService.getById(id);
         if (busStop == null) {
             throw new NotFoundException("BusStop with id " + id + " not found");
@@ -80,7 +81,7 @@ public class BusStopController {
         if (busStop == null) {
             throw new NotFoundException("BusStop with id " + id + " not found");
         }
-        busStopService.delete(id);
+        busStopService.delete(busStop);
         return ResponseEntity.ok().build();
     }
 
