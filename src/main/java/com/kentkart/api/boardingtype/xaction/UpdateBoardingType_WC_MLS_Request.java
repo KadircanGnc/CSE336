@@ -1,5 +1,4 @@
-package com.kentkart.api.xaction;
-
+package com.kentkart.api.boardingtype.xaction;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -8,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UpdateDirection_WC_MLS_Request {
+public class UpdateBoardingType_WC_MLS_Request {
 
-  private String name;
+    private String name;
+    
 }

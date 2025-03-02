@@ -1,4 +1,4 @@
-package com.kentkart.api.xaction;
+package com.kentkart.api.direction.xaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kentkart.api.direction.Direction;

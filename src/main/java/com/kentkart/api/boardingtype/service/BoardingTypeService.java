@@ -23,6 +23,10 @@ public class BoardingTypeService {
         return boardingTypeRepository.findById(id).orElse(null);
     }
 
+    public BoardingType getByName(String name) {
+        return boardingTypeRepository.findByName(name).orElse(null);
+    }
+
     public Page<BoardingType> getAll(Pageable pageable) {
         return boardingTypeRepository.findAll(pageable);
     }

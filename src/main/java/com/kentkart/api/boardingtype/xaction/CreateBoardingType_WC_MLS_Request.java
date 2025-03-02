@@ -1,5 +1,4 @@
-package com.kentkart.api.xaction;
-
+package com.kentkart.api.boardingtype.xaction;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -8,6 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateDirection_WC_MLS_Request {
-  private String name;
+public class CreateBoardingType_WC_MLS_Request {
+
+    private String name;
+    
 }
