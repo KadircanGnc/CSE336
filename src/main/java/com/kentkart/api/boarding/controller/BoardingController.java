@@ -59,6 +59,15 @@ public class BoardingController {
     if (boardingTypeInDB == null) {
       throw new IllegalArgumentException("Boarding type not found");
     }
+
+    if (request.getPassengerId().isEmpty()) {
+      throw new IllegalArgumentException("Passenger id is required");
+    }
+
+    if (request.getBusStopId().isEmpty()) {
+      throw new IllegalArgumentException("Bus stop id is required");
+    }
+
     Boarding boarding = new Boarding();
     boarding.setBoardingType(boardingTypeInDB);
     boarding.setBoardingTime(request.getBoardingTime());
