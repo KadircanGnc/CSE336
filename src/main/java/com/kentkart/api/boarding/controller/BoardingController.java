@@ -17,8 +17,10 @@ import com.kentkart.api.boarding.Boarding;
 import com.kentkart.api.boarding.service.BoardingService;
 import com.kentkart.api.boardingtype.BoardingType;
 import com.kentkart.api.boardingtype.service.BoardingTypeService;
+import com.kentkart.api.exception.NotFoundException;
 import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Response;
+import com.kentkart.api.xaction.GetBoarding_WC_MLS_Response;
 import com.kentkart.api.xaction.GetBoardings_WC_MLS_Response;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Response;
@@ -82,18 +84,26 @@ public class BoardingController {
     return ResponseEntity.ok(response);
   }
 
-  // TODO: Implement GetById method;
+  @GetMapping("/{id}")
+  public ResponseEntity<GetBoarding_WC_MLS_Response> getBoardingById(@PathVariable String id) {
+    Boarding boarding = boardingService.getById(id);
+    if (boarding == null) {
+      throw new NotFoundException("Boarding not found");
+    }
+    return ResponseEntity.ok(new GetBoarding_WC_MLS_Response(boarding));
+
+  }
 
   @PutMapping("/{id}")
   public ResponseEntity<UpdateBoarding_WC_MLS_Response> updateBoarding(@PathVariable String id,
       @RequestBody UpdateBoarding_WC_MLS_Request request) {
     Boarding boardingInDB = boardingService.getById(id);
     if (boardingInDB == null) {
-      throw new IllegalArgumentException("Boarding not found");
+      throw new NotFoundException("Boarding not found");
     }
     BoardingType boardingTypeInDB = boardingTypeService.getByName(request.getBoardingTypeName());
     if (boardingTypeInDB == null) {
-      throw new IllegalArgumentException("Boarding type not found");
+      throw new NotFoundException("Boarding type not found");
     }
     boardingInDB.setBoardingType(boardingTypeInDB);
     boardingInDB.setBoardingTime(request.getBoardingTime());
