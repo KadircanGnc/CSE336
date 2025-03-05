@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kentkart.api.boarding.Boarding;
+import com.kentkart.api.boarding.service.BoardingService;
 import com.kentkart.api.boardingtype.BoardingType;
 import com.kentkart.api.boardingtype.service.BoardingTypeService;
 import com.kentkart.api.exception.BadParametersException;
@@ -22,6 +24,7 @@ import com.kentkart.api.xaction.GetBoardingTypes_WC_MLS_Response;
 import com.kentkart.api.xaction.UpdateBoardingType_WC_MLS_Request;
 import com.kentkart.api.xaction.UpdateBoardingType_WC_MLS_Response;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -30,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardingTypeController {
 
     private final BoardingTypeService boardingTypeService;
+    private final BoardingService boardingService;
 
     @GetMapping
     public ResponseEntity<Page<GetBoardingTypes_WC_MLS_Response>> getBoardingTypes(Pageable pageable) {
@@ -73,10 +77,17 @@ public class BoardingTypeController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteBoardingType(@PathVariable String id) {
         BoardingType boardingType = boardingTypeService.getById(id);
+        
         if (boardingType == null) {
             throw new NotFoundException("BoardingType with id " + id + " not found");
+        }
+        Page<Boarding> boardings = boardingService.getAll(null, null, null, null, new String[]{boardingType.getId()}, Pageable.unpaged());
+        for (Boarding boarding : boardings) {
+            boarding.setBoardingType(null);
+            boardingService.create(boarding);
         }
         boardingTypeService.delete(boardingType);
         return ResponseEntity.ok().build();
