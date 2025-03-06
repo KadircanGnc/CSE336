@@ -27,7 +27,7 @@ public class DepartureService {
         return departureRepository.findAll(pageable);
     }
 
-    public void delete(String id) {
-        departureRepository.deleteById(id);
+    public void delete(Departure departure) {
+        departureRepository.delete(departure);
     }
 }

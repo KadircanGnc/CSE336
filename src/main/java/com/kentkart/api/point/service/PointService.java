@@ -27,8 +27,8 @@ public class PointService {
         return pointRepository.findAll(pageable);
     }
 
-    public void delete(String id) {
-        pointRepository.deleteById(id);
+    public void delete(Point point) {
+        pointRepository.delete(point);
     }
 
 }

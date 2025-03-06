@@ -23,5 +23,5 @@ public class UpdateBoarding_WC_MLS_Request {
 
   private String tripId;
 
-  private String boardingTypeName;
+  private String boardingTypeId;
 }

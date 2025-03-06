@@ -27,7 +27,7 @@ public class RouteService {
         return routeRepository.findAll(pageable);
     }
 
-    public void delete(String id) {
-        routeRepository.deleteById(id);
+    public void delete(Route route) {
+        routeRepository.delete(route);
     }
 }

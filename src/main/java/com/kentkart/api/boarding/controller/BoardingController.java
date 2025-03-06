@@ -22,6 +22,7 @@ import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Response;
 import com.kentkart.api.xaction.GetBoarding_WC_MLS_Response;
 import com.kentkart.api.xaction.GetBoardings_WC_MLS_Response;
+import com.kentkart.api.xaction.GetRoutes_WC_MLS_Response;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Response;
 
@@ -57,7 +58,7 @@ public class BoardingController {
   @PostMapping
   public ResponseEntity<CreateBoarding_WC_MLS_Response> createBoarding(
       @RequestBody CreateBoarding_WC_MLS_Request request) {
-    BoardingType boardingTypeInDB = boardingTypeService.getByName(request.getBoardingTypeName());
+    BoardingType boardingTypeInDB = boardingTypeService.getById(request.getBoardingTypeId());
     if (boardingTypeInDB == null) {
       throw new IllegalArgumentException("Boarding type not found");
     }
@@ -90,8 +91,8 @@ public class BoardingController {
     if (boarding == null) {
       throw new NotFoundException("Boarding not found");
     }
-    return ResponseEntity.ok(new GetBoarding_WC_MLS_Response(boarding));
-
+    GetBoarding_WC_MLS_Response response = new GetBoarding_WC_MLS_Response(boarding);
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
@@ -101,7 +102,7 @@ public class BoardingController {
     if (boardingInDB == null) {
       throw new NotFoundException("Boarding not found");
     }
-    BoardingType boardingTypeInDB = boardingTypeService.getByName(request.getBoardingTypeName());
+    BoardingType boardingTypeInDB = boardingTypeService.getById(request.getBoardingTypeId());
     if (boardingTypeInDB == null) {
       throw new NotFoundException("Boarding type not found");
     }
