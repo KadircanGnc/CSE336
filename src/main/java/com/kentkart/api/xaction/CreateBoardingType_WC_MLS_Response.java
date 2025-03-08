@@ -15,4 +15,8 @@ public class CreateBoardingType_WC_MLS_Response {
     public CreateBoardingType_WC_MLS_Response(BoardingType boardingType) {
         this.id = boardingType.getId();
     }
+
+    public CreateBoardingType_WC_MLS_Response(String id) {
+        this.id = id;
+    }
 }
