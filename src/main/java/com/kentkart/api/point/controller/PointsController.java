@@ -97,7 +97,7 @@ public class PointsController {
             throw new NotFoundException("Point not found");
         }
         pointService.delete(point);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
     
 }

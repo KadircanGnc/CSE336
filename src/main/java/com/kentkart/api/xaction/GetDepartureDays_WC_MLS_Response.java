@@ -13,10 +13,10 @@ public class GetDepartureDays_WC_MLS_Response {
     
     private String id;
 
-    private String name;
+    private String day;
 
     public GetDepartureDays_WC_MLS_Response(DepartureDay departureDay) {
         this.id = departureDay.getId();
-        this.name = departureDay.getDay();
+        this.day = departureDay.getDay();
     }
 }

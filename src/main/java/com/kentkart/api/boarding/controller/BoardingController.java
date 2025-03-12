@@ -22,7 +22,6 @@ import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.CreateBoarding_WC_MLS_Response;
 import com.kentkart.api.xaction.GetBoarding_WC_MLS_Response;
 import com.kentkart.api.xaction.GetBoardings_WC_MLS_Response;
-import com.kentkart.api.xaction.GetRoutes_WC_MLS_Response;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Request;
 import com.kentkart.api.xaction.UpdateBoarding_WC_MLS_Response;
 
@@ -105,7 +104,7 @@ public class BoardingController {
     BoardingType boardingTypeInDB = boardingTypeService.getById(request.getBoardingTypeId());
     if (boardingTypeInDB == null) {
       throw new NotFoundException("Boarding type not found");
-    }
+    }    
     boardingInDB.setBoardingType(boardingTypeInDB);
     boardingInDB.setBoardingTime(request.getBoardingTime());
     boardingInDB.setBusStopId(request.getBusStopId());
