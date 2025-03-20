@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kentkart.api.boarding.Boarding;
 import com.kentkart.api.boarding.service.BoardingService;
+import com.kentkart.api.boardingtype.BoardingType;
+import com.kentkart.api.boardingtype.service.BoardingTypeService;
 import com.kentkart.api.busstop.BusStop;
 import com.kentkart.api.busstop.service.BusStopService;
 
@@ -25,6 +27,8 @@ public class AppFiltersController {
   private final BoardingService boardingService;
 
   private final BusStopService busStopService;
+
+  private final BoardingTypeService boardingTypeService;
 
   @GetMapping("/boardings/passenger-ids")
   public ResponseEntity<List<String>> getPassengerIds() {
@@ -62,4 +66,27 @@ public class AppFiltersController {
     return ResponseEntity.ok(busStopIds);
   }
 
+  @GetMapping("/boardings/trips")
+  public ResponseEntity<List<String>> getTrips() {
+    Page<Boarding> boardings = boardingService.getAll(null, null, null, null, null, Pageable.unpaged());
+    List<String> tripIds = new ArrayList<>();
+    for (Boarding boarding : boardings) {
+      if (!tripIds.contains(boarding.getTripId())) {
+        tripIds.add(boarding.getTripId());
+      }
+    }
+    return ResponseEntity.ok(tripIds);
+  }
+
+  @GetMapping("/boarding-type-ids")
+  public ResponseEntity<List<String>> getBoardingTypeIds() {
+    Page<BoardingType> boardingTypes = boardingTypeService.getAll(Pageable.unpaged());
+    List<String> boardingTypeIds = new ArrayList<>();
+    for (BoardingType boardingType : boardingTypes) {
+      if (!boardingTypeIds.contains(boardingType.getId())) {
+        boardingTypeIds.add(boardingType.getId());
+      }
+    }
+    return ResponseEntity.ok(boardingTypeIds);
+  }
 }
