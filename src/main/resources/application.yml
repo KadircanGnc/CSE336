@@ -2,11 +2,11 @@ spring:
   application:
     name: kentkartstatsapi
   jpa:
-    database: MYSQL
+    database: POSTGRESQL
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}?allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false&requireSSL=false
     username: ${DB_USER}
     password: ${DB_PASS}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver

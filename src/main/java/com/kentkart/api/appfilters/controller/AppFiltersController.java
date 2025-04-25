@@ -1,7 +1,9 @@
 package com.kentkart.api.appfilters.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,9 +33,9 @@ public class AppFiltersController {
   private final BoardingTypeService boardingTypeService;
 
   @GetMapping("/boardings/passenger-ids")
-  public ResponseEntity<List<String>> getPassengerIds() {
+  public ResponseEntity<Set<String>> getPassengerIds() {
     Page<Boarding> boardings = boardingService.getAll(null, null, null, null, null, Pageable.unpaged());
-    List<String> passengerIds = new ArrayList<>();
+    Set<String> passengerIds = new HashSet<>();
     for (Boarding boarding : boardings) {
       if (!passengerIds.contains(boarding.getPassengerId())) {
         passengerIds.add(boarding.getPassengerId());
@@ -43,9 +45,9 @@ public class AppFiltersController {
   }
 
   @GetMapping("/boardings/passenger-types")
-  public ResponseEntity<List<String>> getPassengerTypes() {
+  public ResponseEntity<Set<String>> getPassengerTypes() {
     Page<Boarding> boardings = boardingService.getAll(null, null, null, null, null, Pageable.unpaged());
-    List<String> passengerTypes = new ArrayList<>();
+    Set<String> passengerTypes = new HashSet<>();
     for (Boarding boarding : boardings) {
       if (!passengerTypes.contains(boarding.getPassengerType())) {
         passengerTypes.add(boarding.getPassengerType());
@@ -55,9 +57,9 @@ public class AppFiltersController {
   }
 
   @GetMapping("/bus-stops")
-  public ResponseEntity<List<String>> getBusStops() {
+  public ResponseEntity<Set<String>> getBusStops() {
     Page<BusStop> busStops = busStopService.getAll(Pageable.unpaged());
-    List<String> busStopIds = new ArrayList<>();
+    Set<String> busStopIds = new HashSet<>();
     for (BusStop busStop : busStops) {
       if (!busStopIds.contains(busStop.getId())) {
         busStopIds.add(busStop.getId());
@@ -67,9 +69,9 @@ public class AppFiltersController {
   }
 
   @GetMapping("/boardings/trips")
-  public ResponseEntity<List<String>> getTrips() {
+  public ResponseEntity<Set<String>> getTrips() {
     Page<Boarding> boardings = boardingService.getAll(null, null, null, null, null, Pageable.unpaged());
-    List<String> tripIds = new ArrayList<>();
+    Set<String> tripIds = new HashSet<>();
     for (Boarding boarding : boardings) {
       if (!tripIds.contains(boarding.getTripId())) {
         tripIds.add(boarding.getTripId());
@@ -79,9 +81,9 @@ public class AppFiltersController {
   }
 
   @GetMapping("/boarding-type-ids")
-  public ResponseEntity<List<String>> getBoardingTypeIds() {
+  public ResponseEntity<Set<String>> getBoardingTypeIds() {
     Page<BoardingType> boardingTypes = boardingTypeService.getAll(Pageable.unpaged());
-    List<String> boardingTypeIds = new ArrayList<>();
+    Set<String> boardingTypeIds = new HashSet<>();
     for (BoardingType boardingType : boardingTypes) {
       if (!boardingTypeIds.contains(boardingType.getId())) {
         boardingTypeIds.add(boardingType.getId());
