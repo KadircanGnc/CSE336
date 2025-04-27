@@ -51,6 +51,10 @@ public class RandomizerService {
     return random.nextDouble() * 180 - 90;
   }
 
+  public static double getRandomLatLng(double min, double max) {
+    return min + (max - min) * Math.random(); // Generates a value within [min, max]
+}
+
   public static List<String> getRandomElements(List<String> list, int count) {
     return random.ints(0, list.size()).distinct().limit(count).mapToObj(list::get).toList();
   }
@@ -62,4 +66,8 @@ public class RandomizerService {
     }
     return randomStrings;
   }
+
+  public static double getRandomDoubleInRange(double min, double max) {
+    return min + (max - min) * Math.random(); // Math.random() generates a value between 0 and 1, scaled to the range [min, max]
+}
 }

@@ -50,17 +50,35 @@ public class MockConstantsService {
 
   private final DepartureRepository departureRepository;
 
-  private final List<String> passengerIds = RandomizerService.getRandomElements(4);
+  // private final List<String> passengerIds =
+  // RandomizerService.getRandomElements(4);
 
-  private final List<String> tripIds = RandomizerService.getRandomElements(4);
+  // private final List<String> tripIds = RandomizerService.getRandomElements(4);
 
-  private final List<String> passengerTypes = RandomizerService.getRandomElements(4);
+  // private final List<String> passengerTypes =
+  // RandomizerService.getRandomElements(4);
+
+  private static final List<String> BOARDING_TYPES = List.of("Standard", "VIP", "Business Class");
+
+  private static final List<String> BUS_STOP_NAMES = List.of("Downtown", "Central Station", "Park Avenue", "University",
+      "Main Street");
+
+  private static final List<String> DIRECTIONS = List.of("North", "South", "East", "West");
+
+  private static final List<String> LINE_CODES = List.of("L1", "L2", "L3", "L4");
+
+  private static final List<String> PASSENGER_TYPES = List.of("Adult", "Senior", "Student", "Child");
+
+  private static final List<String> TRIP_IDS = List.of("T1001", "T1002", "T1003", "T1004");
+
+  private static final List<String> DAYS_OF_THE_WEEK = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+      "Saturday", "Sunday");
 
   public List<MockObjectCreationResponse> createBoardingTypes(Integer count) {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       BoardingType boardingType = new BoardingType();
-      boardingType.setName(RandomizerService.createRandomString(10));
+      boardingType.setName(BOARDING_TYPES.get(RandomizerService.getRandomNumberInRange(0, BOARDING_TYPES.size() - 1)));
       boardingType = boardingTypeRepository.save(boardingType);
       responses.add(new MockObjectCreationResponse(boardingType.getId(), boardingType.getClass().getSimpleName()));
     }
@@ -71,9 +89,9 @@ public class MockConstantsService {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       BusStop busStop = new BusStop();
-      busStop.setStopName(RandomizerService.createRandomString(10));
-      busStop.setLatitude(RandomizerService.getRandomLatLng());
-      busStop.setLongitude(RandomizerService.getRandomLatLng());
+      busStop.setStopName(BUS_STOP_NAMES.get(RandomizerService.getRandomNumberInRange(0, BUS_STOP_NAMES.size() - 1)));
+      busStop.setLatitude(getRandomLatitude());
+      busStop.setLongitude(getRandomLongitude());
       busStop = busStopRepository.save(busStop);
       responses.add(new MockObjectCreationResponse(busStop.getId(), busStop.getClass().getSimpleName()));
     }
@@ -84,7 +102,7 @@ public class MockConstantsService {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       Direction direction = new Direction();
-      direction.setName(RandomizerService.createRandomString(10));
+      direction.setName(DIRECTIONS.get(RandomizerService.getRandomNumberInRange(0, DIRECTIONS.size() - 1)));
       direction = directionRepository.save(direction);
       responses.add(new MockObjectCreationResponse(direction.getId(), direction.getClass().getSimpleName()));
     }
@@ -95,8 +113,8 @@ public class MockConstantsService {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       Line line = new Line();
-      line.setLineCode(RandomizerService.createRandomString(10));
-      line.setLineCodeRepresentation(RandomizerService.createRandomString(4));
+      line.setLineCode(LINE_CODES.get(RandomizerService.getRandomNumberInRange(0, LINE_CODES.size() - 1)));
+      line.setLineCodeRepresentation("Line " + RandomizerService.getRandomNumberInRange(1, 100));
       line = lineRepository.save(line);
       responses.add(new MockObjectCreationResponse(line.getId(), line.getClass().getSimpleName()));
     }
@@ -108,9 +126,9 @@ public class MockConstantsService {
     for (int i = 0; i < count; i++) {
       Point point = new Point();
       point.setRoute(getRandomRoute());
-      point.setLatitude(RandomizerService.getRandomLatLng());
-      point.setLongitude(RandomizerService.getRandomLatLng());
-      point.setSequence(RandomizerService.getRandomNumberInRange(0, 100));
+      point.setLatitude(getRandomLatitude());
+      point.setLongitude(getRandomLongitude());
+      point.setSequence(i);
       point = pointRepository.save(point);
       responses.add(new MockObjectCreationResponse(point.getId(), point.getClass().getSimpleName()));
     }
@@ -133,7 +151,8 @@ public class MockConstantsService {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       DepartureDay departureDay = new DepartureDay();
-      departureDay.setDay(RandomizerService.createRandomString(5));
+      departureDay
+          .setDay(DAYS_OF_THE_WEEK.get(RandomizerService.getRandomNumberInRange(0, DAYS_OF_THE_WEEK.size() - 1)));
       departureDay = departureDayRepository.save(departureDay);
       responses.add(new MockObjectCreationResponse(departureDay.getId(), departureDay.getClass().getSimpleName()));
     }
@@ -142,14 +161,14 @@ public class MockConstantsService {
 
   public List<MockObjectCreationResponse> createBoardings(Integer count) {
     List<MockObjectCreationResponse> responses = new ArrayList<>();
-    int multipliedCount = count * 1000;
+    int multipliedCount = count * 10;
     for (int i = 0; i < multipliedCount; i++) {
       Boarding boarding = new Boarding();
       boarding.setBoardingType(getRandomBoardingType());
       boarding.setBoardingTime(RandomizerService.createRandomTime());
       boarding.setBusStopId(getRandomBusStop().getId());
-      boarding.setLatitude(RandomizerService.getRandomLatLng());
-      boarding.setLongitude(RandomizerService.getRandomLatLng());
+      boarding.setLatitude(getRandomLatitude());
+      boarding.setLongitude(getRandomLongitude());
       boarding.setPassengerType(getRandomPassengerType());
       boarding.setTripId(getRandomTripId());
       boarding.setPassengerId(getRandomPassengerId());
@@ -204,15 +223,32 @@ public class MockConstantsService {
   }
 
   private String getRandomPassengerId() {
-    return passengerIds.get(RandomizerService.getRandomNumberInRange(0, passengerIds.size() - 1));
+    String passengerType = getRandomPassengerType(); // Assume this method returns values like "Adult", "Senior", etc.
+    int passengerNumber = RandomizerService.getRandomNumberInRange(1, 1000);
+    return passengerType.toUpperCase() + "-" + String.format("%03d", passengerNumber); // Example: ADULT-001,
+                                                                                       // SENIOR-002, etc.
   }
 
   private String getRandomTripId() {
-    return tripIds.get(RandomizerService.getRandomNumberInRange(0, tripIds.size() - 1));
+    return TRIP_IDS.get(RandomizerService.getRandomNumberInRange(0, TRIP_IDS.size() - 1));
   }
 
   private String getRandomPassengerType() {
-    return passengerTypes.get(RandomizerService.getRandomNumberInRange(0, passengerTypes.size() - 1));
+    return PASSENGER_TYPES.get(RandomizerService.getRandomNumberInRange(0, PASSENGER_TYPES.size() - 1));
   }
+
+  public double getRandomLatitude() {
+    double centerLatitude = 36.884804;
+    double delta = 0.01; // about ~1 km variation
+    return RandomizerService.getRandomDoubleInRange(centerLatitude - delta, centerLatitude + delta);
+}
+
+public double getRandomLongitude() {
+    double centerLongitude = 30.704044;
+    double delta = 0.01; // about ~1 km variation
+    return RandomizerService.getRandomDoubleInRange(centerLongitude - delta, centerLongitude + delta);
+}
+
+  
 
 }

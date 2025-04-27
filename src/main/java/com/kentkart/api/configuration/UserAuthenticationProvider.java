@@ -24,8 +24,10 @@ public class UserAuthenticationProvider {
 
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
+    
 
     private final UserService userService;
+    private final JwtProperties jwtProperties;
 
     @PostConstruct
     protected void init() {
@@ -35,7 +37,7 @@ public class UserAuthenticationProvider {
 
     public String createToken(UserDto user) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3600000); // 1 hour
+        Date validity = new Date(now.getTime() + jwtProperties.getExpiration()); 
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()
